@@ -15,10 +15,11 @@ args = parser.parse_args()
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 ROOT_TRAIN = 'E:/onlyfat_selfa3D_2/Data/Eye_Images/train_info.csv'
 ROOT_TEST = 'E:/onlyfat_selfa3D_2/Data/Eye_Images/test_info.csv'
+DATA_DIR = 'E:/onlyfat_selfa3D_2/eye_state/Eye_Images/LeftEyes'
 min_loss = 10
 
 def main():
-    train_loader, test_loader = LoadEyeData(ROOT_TRAIN, ROOT_TEST, args.batch_size)
+    train_loader, test_loader = LoadEyeData(ROOT_TRAIN, ROOT_TEST, DATA_DIR, args.batch_size)
     model = LeNet5().to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
     criterion = nn.CrossEntropyLoss()
