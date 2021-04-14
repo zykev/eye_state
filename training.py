@@ -1,9 +1,9 @@
 import torch.nn as nn
 import argparse
 import datetime
-from eye_state.network import LeNet5
-from eye_state.load_data import LoadEyeData
-from eye_state.util import *
+from network import LeNet5
+from load_data import LoadEyeData
+from util import *
 
 parser = argparse.ArgumentParser(description='Eye State Training')
 parser.add_argument('--epochs', default=50, type=int, help='number of total epochs to run (default: 50)')
