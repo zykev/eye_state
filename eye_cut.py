@@ -6,7 +6,8 @@ import matplotlib.patches as patches
 import dlib
 
 
-image_path = 'E:/onlyfat_selfa3D_2/Data/Data-S235/1100/1.jpg'
+# image_path = 'E:/onlyfat_selfa3D_2/Data/Data-S235/1100/1.jpg'
+image_path = 'C:/Users/admin/Desktop/face.jpg'
 predictor_model_path = 'E:/onlyfat_selfa3D_2/face_detect_align/detector/shape_predictor_68_face_landmarks.dat'
 # Create face detector
 detector = MTCNN(select_largest=False, post_process=False)
@@ -35,6 +36,7 @@ cv2.imshow('img', eye_img)
 
 
 plt.figure(figsize=(12,8))
+img = img[:, :, ::-1]
 plt.imshow(img)
 currentAxis=plt.gca()
 rect=patches.Rectangle((boxes[0], boxes[1]),boxes[2]-boxes[0],boxes[3]-boxes[1],linewidth=1,edgecolor='r',facecolor='none')
