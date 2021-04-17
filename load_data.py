@@ -10,7 +10,7 @@ class EyeData(Dataset):
     def __init__(self, root_dir, data_dir, transform=None):
         self.data_dir = data_dir
         self.transform = transform
-        eye_data = pd.read_csv(root_dir)
+        eye_data = pd.read_csv(root_dir, sep=' ')
         self.img_name = np.array(eye_data['name'])
         self.img_label = np.array(eye_data['label'])
 
@@ -31,11 +31,18 @@ class EyeData(Dataset):
 
 def LoadEyeData(root_train, root_test, data_dir, batch_size):
 
-    transform = transforms.Compose([transforms.ToTensor(),
-                                     transforms.Normalize(mean=(0.5, 0.5, 0.5),
-                                                           std=(0.5, 0.5, 0.5))])
-    train_dataset = EyeData(root_train, data_dir, transform=transform)
-    test_dataset = EyeData(root_test, data_dir, transform=transform)
+    transform_train = transforms.Compose([
+        transforms.RandomHorizontalFlip(),
+        transforms.RandomRotation(10),
+        transforms.ToTensor(),
+        transforms.Normalize(mean=(0.5,), std=(0.5,))
+    ])
+    transform_val = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize(mean=(0.5,), std=(0.5,))
+    ])
+    train_dataset = EyeData(root_train, data_dir, transform=transform_train)
+    test_dataset = EyeData(root_test, data_dir, transform=transform_val)
 
     train_loader = DataLoader(dataset=train_dataset,
                               batch_size=batch_size,

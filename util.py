@@ -1,6 +1,5 @@
 import torch
 import matplotlib.pyplot as plt
-import numpy as np
 import os
 
 def save_checkpoint(state):
@@ -30,24 +29,19 @@ def plot_training(train_losses, valid_losses, train_acces, valid_acces):
     Function for plotting training and validation losses/ acc
     '''
 
-    train_losses = np.array(train_losses)
-    valid_losses = np.array(valid_losses)
-    train_acces = np.array(train_acces)
-    valid_acces = np.array(valid_acces)
-
-    plt.figure(figsize=(16, 5))
+    plt.figure(figsize=(12, 5))
     plt.subplot(121)
 
-    plt.plot(train_losses, color='blue', label='Training loss')
-    plt.plot(valid_losses, color='red', label='Validation loss')
+    plt.plot(list(range(len(train_losses))), train_losses, color='blue', label='Training loss')
+    plt.plot(list(range(len(valid_losses))), valid_losses, color='red', label='Validation loss')
     plt.legend()
     plt.xlabel('Epoch')
     plt.ylabel('Loss')
     plt.title('Loss over epochs')
 
     plt.subplot(122)
-    plt.plot(train_acces, color='blue', label='Training acc')
-    plt.plot(valid_acces, color='red', label='Validation acc')
+    plt.plot(list(range(len(train_acces))), train_acces, color='blue', label='Training acc')
+    plt.plot(list(range(len(valid_acces))), valid_acces, color='red', label='Validation acc')
     plt.legend()
     plt.xlabel('Epoch')
     plt.ylabel('Acc')
